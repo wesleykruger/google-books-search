@@ -25,7 +25,7 @@ class Books extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ books: res.data, title: "", author: "", description: "", thumbnail: "", infoLink: "" })
       )
       .catch(err => console.log(err));
   };
@@ -61,7 +61,6 @@ class Books extends Component {
         this.state.author,
       )
         .then(res => {
-          console.log(res);
           this.setState({search: res.data.items})
     })
         .catch(err => console.log(err));
@@ -136,9 +135,9 @@ class Books extends Component {
               <a href={result.volumeInfo.infoLink} alt="searchResult" target="_blank" rel="noopener noreferrer">
             {result.volumeInfo.title}
             <span><br /></span>
-            by {result.volumeInfo.authors ? result.volumeInfo.authors[0]: "No Author Available"}
+            by {result.volumeInfo.authors ? result.volumeInfo.authors[0]: "Author Unknown"}
             </a>
-            <SaveBtn onClick={() => this.saveBook(result.volumeInfo.title, result.volumeInfo.authors, result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail, result.volumeInfo.infoLink)} />
+            <SaveBtn onClick={() => this.saveBooks(result.volumeInfo.title, result.volumeInfo.authors, result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail, result.volumeInfo.infoLink)} />
             </ListItem>
             ))}
               </List>

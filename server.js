@@ -1,7 +1,7 @@
 const express = require("express");
 
 const mongoose = require("mongoose");
-const routes = require("./routes/api");
+const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -18,7 +18,7 @@ app.use(routes);
 // Connect to the Mongo DB
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/noRegretsDB", { useNewUrlParser: true }
+  "mongodb://localhost/google-reading-list", { useNewUrlParser: true }
 );
 
 // Start the API server
