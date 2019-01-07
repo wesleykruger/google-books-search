@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import DeleteBtn from "../components/DeleteBtn";
-import SaveBtn from "../components/SaveBtn";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { Input, FormBtn } from "../components/Form";
 
 class Books extends Component {
   // Setting our component's initial state
@@ -71,35 +69,9 @@ class Books extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
-              <h1>Add a Book to Your Reading List!</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title"
-              />
-              <Input
-                value={this.state.author}
-                onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author"
-              />
-
-              <FormBtn
-                disabled={!(this.state.author || this.state.title)}
-                onClick={this.handleFormSubmit}
-              >
-                Book Search
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>My List</h1>
+              <h1>My Reading List</h1>
             </Jumbotron>
             {this.state.books.length ? (
               <List>
@@ -107,7 +79,7 @@ class Books extends Component {
                   return (
                     <ListItem key={book._id}>
                       <Row>
-                      <img src={book.image} />
+                      <img src={book.image} alt={book.title + " image"} />
                       </Row>
                       <Row>
                       <a href={"/books/" + book._id}>
@@ -115,6 +87,13 @@ class Books extends Component {
                           {book.title} by {book.author}
                         </strong>
                       </a>
+                      </Row>
+                      <Row>
+                        {book.description ?
+                        book.description.length > 250 ?
+                        book.description.substr(0,250) + "...":
+                        book.description.substr(0,250):
+                        "No Description available"}
                       </Row>
                       <Row>
                         <Col size="md-9"></Col>
@@ -129,46 +108,6 @@ class Books extends Component {
             ) : (
               <h3>No Results to Display</h3>
             )}
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-6">
-          <h3>Results area</h3>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-6">
-          {this.state.search ?
-          <List>
-          {this.state.search.map(result => (
-            <ListItem key={result.id}>
-            <Row>
-              <img src={result.volumeInfo.imageLinks.thumbnail} />
-            </Row>
-            <Row>
-              <a href={result.volumeInfo.infoLink} alt="searchResult" target="_blank" rel="noopener noreferrer">
-            {result.volumeInfo.title}
-            <span><br /></span>
-            by {result.volumeInfo.authors[0]}
-            </a>
-            </Row>
-            <Row>
-              <Col size="md-12">
-                {result.volumeInfo.description ?
-                  result.volumeInfo.description.substr(0,250):
-                  "No Description available"}
-              </Col>
-            </Row>
-            <Row>
-              <Col size="md-9"></Col>
-              <Col size="md-3">
-                <SaveBtn onClick={() => this.saveBooks(result.volumeInfo.title, result.volumeInfo.authors, result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail, result.volumeInfo.infoLink)} />
-              </Col>
-            </Row>
-            </ListItem>
-            ))}
-              </List>
-              : <h3>No results found</h3>}
           </Col>
         </Row>
       </Container>
