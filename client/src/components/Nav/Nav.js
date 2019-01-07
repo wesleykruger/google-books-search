@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Nav() {
   return (
@@ -9,7 +9,7 @@ function Nav() {
       </a>
       <ul className="navbar-nav flex-row ml-md-auto links">
         <li className="nav-item active">
-          <Link to="/search" activeClassName="active" className="nav-link d-inline-flex">Search<span className="border-right mx-2"></span></Link>
+          <Link to="/search" className="nav-link d-inline-flex">Search<span className="border-right mx-5"></span></Link>
         </li>
         <li className="nav-item active">
           <Link to="saved" className="nav-link d-inline-flex">Saved</Link>
