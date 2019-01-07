@@ -14,7 +14,6 @@ class Books extends Component {
     search: [],
     title: "",
     author: "",
-    // synopsis: ""
   };
 
   // When the component mounts, load all books and save them to this.state.books
@@ -61,7 +60,9 @@ class Books extends Component {
         this.state.title,
         this.state.author,
       )
-        .then(res => {this.setState({search: res.data.items})
+        .then(res => {
+          console.log(res);
+          this.setState({search: res.data.items})
     })
         .catch(err => console.log(err));
     }

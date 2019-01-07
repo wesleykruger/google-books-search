@@ -21,8 +21,11 @@ export default {
 
   // This is used to pull back results from Google's book api. It does not interact with our MongoDB back end
   googleSearch: function(bookTitle, author) {
-    // return axios.get (`https://www.googleapis.com/books/v1/volumes?q=${book}&key=${process.env.REACT_APP-API_KEY}`)
+    console.log("in search")
     return axios.get (`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}+author:${author}&key=${process.env.REACT_APP_SECRET_API_KEY}`)
+    .catch(err => {
+      console.log(err);
+    })
 
   }
   // Get - Will load your single HTML page in client/build/index.html
