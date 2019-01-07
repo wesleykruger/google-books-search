@@ -99,19 +99,29 @@ class Books extends Component {
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>My List</h1>
             </Jumbotron>
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => {
                   return (
                     <ListItem key={book._id}>
+                      <Row>
+                      <img src={book.image} />
+                      </Row>
+                      <Row>
                       <a href={"/books/" + book._id}>
-                        <strong>
+                      <strong>
                           {book.title} by {book.author}
                         </strong>
                       </a>
-                      <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                      </Row>
+                      <Row>
+                        <Col size="md-9"></Col>
+                        <Col size="md-3">
+                          <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                        </Col>
+                      </Row>
                     </ListItem>
                   );
                 })}
@@ -132,12 +142,29 @@ class Books extends Component {
           <List>
           {this.state.search.map(result => (
             <ListItem key={result.id}>
+            <Row>
+              <img src={result.volumeInfo.imageLinks.thumbnail} />
+            </Row>
+            <Row>
               <a href={result.volumeInfo.infoLink} alt="searchResult" target="_blank" rel="noopener noreferrer">
             {result.volumeInfo.title}
             <span><br /></span>
             by {result.volumeInfo.authors[0]}
             </a>
-            <SaveBtn onClick={() => this.saveBooks(result.volumeInfo.title, result.volumeInfo.authors, result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail, result.volumeInfo.infoLink)} />
+            </Row>
+            <Row>
+              <Col size="md-12">
+                {result.volumeInfo.description ?
+                  result.volumeInfo.description.substr(0,250):
+                  "No Description available"}
+              </Col>
+            </Row>
+            <Row>
+              <Col size="md-9"></Col>
+              <Col size="md-3">
+                <SaveBtn onClick={() => this.saveBooks(result.volumeInfo.title, result.volumeInfo.authors, result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail, result.volumeInfo.infoLink)} />
+              </Col>
+            </Row>
             </ListItem>
             ))}
               </List>
