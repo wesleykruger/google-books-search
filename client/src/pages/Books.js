@@ -31,7 +31,7 @@ class Books extends Component {
   };
 
   saveBooks = (title, author, description, thumbnail, infoLink) => {
-    API.saveBook({title, author, description, thumbnail, infoLink})
+    API.saveBook({title: title, author:author, description:description, image: thumbnail, link: infoLink})
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
   }
