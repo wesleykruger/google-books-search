@@ -4,7 +4,7 @@ import { BrowserRouter, NavLink, Link } from "react-router-dom";
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a className="navbar-brand">
+      <a className="navbar-brand text-light">
         Google Reading List
       </a>
       <ul className="navbar-nav flex-row ml-md-auto links">
