@@ -80,13 +80,13 @@ class Books extends Component {
                 value={this.state.title}
                 onChange={this.handleInputChange}
                 name="title"
-                placeholder="Title (required)"
+                placeholder="Title"
               />
               <Input
                 value={this.state.author}
                 onChange={this.handleInputChange}
                 name="author"
-                placeholder="Author (required)"
+                placeholder="Author"
               />
 
               <FormBtn
@@ -135,7 +135,7 @@ class Books extends Component {
               <a href={result.volumeInfo.infoLink} alt="searchResult" target="_blank" rel="noopener noreferrer">
             {result.volumeInfo.title}
             <span><br /></span>
-            by {result.volumeInfo.authors ? result.volumeInfo.authors[0]: "Author Unknown"}
+            by {result.volumeInfo.authors[0]}
             </a>
             <SaveBtn onClick={() => this.saveBooks(result.volumeInfo.title, result.volumeInfo.authors, result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail, result.volumeInfo.infoLink)} />
             </ListItem>
